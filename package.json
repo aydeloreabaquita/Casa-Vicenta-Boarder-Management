@@ -1,0 +1,30 @@
+{
+  "name": "casa-vicenta-fullstack",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build && concurrently -k -n API,WEB \"wrangler dev --port 8787\" \"vite --port 5173\"",
+    "web:dev": "vite --port 5173",
+    "worker:dev": "npm run build && wrangler dev --port 8787",
+    "build": "vite build",
+    "deploy": "npm run build && wrangler deploy",
+    "db:local": "wrangler d1 migrations apply casa-vicenta-db --local",
+    "db:remote": "wrangler d1 migrations apply casa-vicenta-db --remote",
+    "types": "wrangler types",
+    "demo": "vite --mode demo --port 5173",
+    "build:demo": "vite build --mode demo",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "latest",
+    "concurrently": "latest",
+    "vite": "latest",
+    "wrangler": "latest"
+  }
+}
