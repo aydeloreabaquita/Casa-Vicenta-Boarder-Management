@@ -15,14 +15,14 @@ function publicPageFromPath() {
 }
 
 const demoUsers = {
-  admin: { id: 1, fullName: "Demo Admin", email: "admin@demo.local", phone: null, role: "admin", mustChangePassword: false, status: "active" },
+  admin: { id: 1, fullName: "Aydelore Abaquita", email: "aabaquita22@gmail.com", phone: null, role: "admin", mustChangePassword: false, status: "active" },
   boarder: { id: 11, fullName: "Jamie Santos", email: "boarder@demo.local", phone: "09170000011", role: "boarder", mustChangePassword: false, status: "active" }
 };
 
 export default function App(){
   const [page,setPage]=useState(publicPageFromPath);
   const [user,setUser]=useState(null);
-  const [theme,setTheme]=useState(localStorage.getItem("theme")||"light");
+  const [theme,setTheme]=useState(localStorage.getItem("theme")||(isDemoMode?"dark":"light"));
 
   useEffect(()=>{
     document.documentElement.dataset.theme=theme;
@@ -109,7 +109,7 @@ export default function App(){
         <button className="text-btn" onClick={()=>navigate("home")}>Website</button>
         {isDemoMode&&<>
           <span className="demo-badge">Portfolio Demo</span>
-          <button className="text-btn demo-role" onClick={()=>enterDemo("admin")}>Admin Demo</button>
+          <button className="text-btn demo-role" onClick={()=>navigate("login")}>Admin Demo</button>
           <button className="text-btn demo-role" onClick={()=>enterDemo("boarder")}>Boarder Demo</button>
         </>}
         {user
@@ -125,7 +125,7 @@ export default function App(){
 
     {isDemoMode&&<div className="demo-switcher">
       <div><strong>Portfolio demo</strong><span>Sample data only. Actions are simulated.</span></div>
-      <div className="actions"><button className="btn secondary small" onClick={()=>navigate("home")}>Public Site</button><button className="btn secondary small" onClick={()=>enterDemo("boarder")}>Boarder Demo</button><button className="btn primary small" onClick={()=>enterDemo("admin")}>Admin Demo</button></div>
+      <div className="actions"><button className="btn secondary small" onClick={()=>navigate("home")}>Public Site</button><button className="btn secondary small" onClick={()=>enterDemo("boarder")}>Boarder Demo</button><button className="btn primary small" onClick={()=>navigate("login")}>Admin Demo</button></div>
     </div>}
 
     {page==="home"&&<PublicWebsite onNavigate={navigate} user={user} onProfile={goToProfile}/>} 
@@ -137,3 +137,4 @@ export default function App(){
     {page==="admin"&&user?.role==="admin"&&<AdminDashboard/>} 
   </div>
 }
+
