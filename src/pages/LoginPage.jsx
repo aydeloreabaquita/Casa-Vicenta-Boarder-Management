@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ShieldCheck } from "lucide-react";
-import { api } from "../lib/api";
+import { api, isDemoMode } from "../lib/api";
 import PasswordField from "../components/PasswordField";
 
 export default function LoginPage({ onNavigate, onAuthenticated }) {
@@ -19,6 +19,14 @@ export default function LoginPage({ onNavigate, onAuthenticated }) {
     const form = new FormData(e.currentTarget);
 
     try {
+      if (isDemoMode) {
+        const identifier = String(form.get("identifier") || "").trim().toLowerCase();
+        const password = String(form.get("password") || "");
+        const response = await fetch("/api/demo-login", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ identifier, password }) });
+        if (!response.ok) throw new Error("Use the Casa Vicenta demo credentials shown on the portfolio.");
+        onAuthenticated({ id: 1, fullName: "Aydelore Abaquita", email: "aabaquita22@gmail.com", phone: null, role: "admin", mustChangePassword: false, status: "active" });
+        return;
+      }
       const data = await api("/api/auth/login", {
         method: "POST",
         body: {
@@ -74,6 +82,7 @@ export default function LoginPage({ onNavigate, onAuthenticated }) {
           <input
             name="identifier"
             required
+            defaultValue={isDemoMode ? "aabaquita22@gmail.com" : ""}
             placeholder="email@example.com or 09XXXXXXXXX"
           />
         </label>
@@ -139,3 +148,4 @@ export default function LoginPage({ onNavigate, onAuthenticated }) {
     </div>
   </div>;
 }
+
