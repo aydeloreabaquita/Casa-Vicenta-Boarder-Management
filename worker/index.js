@@ -52,6 +52,9 @@ export default {
           landladyPhone: settings.landlady_phone || ""
         });
       }
+      if (url.pathname === "/api/public/contract" && request.method === "GET") {
+        return await publicContract(env);
+      }
       if (url.pathname === "/api/applications" && request.method === "POST") {
         return await submitApplication(request, env);
       }
@@ -840,6 +843,11 @@ async function createComplaint(request, env, user) {
     INSERT INTO complaints (boarder_id,room_id,category,subject,description) VALUES (?,?,?,?,?)
   `).bind(user.id, occupancy?.room_id || null, category, subject, description).run();
   return json({ ok: true, complaintId: result.meta?.last_row_id }, 201);
+}
+
+async function publicContract(env) {
+  const contract = await env.DB.prepare("SELECT id, version, title, content FROM contracts WHERE active=1 ORDER BY id DESC LIMIT 1").first();
+  return json({ contract: contract || null });
 }
 
 async function boarderContract(env, user) {

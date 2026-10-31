@@ -51,3 +51,7 @@
 @media(max-width:900px){.public-site .hero{min-height:640px;padding-top:80px}.public-site .hero-card{justify-self:start}.room-card{grid-template-columns:1fr}.room-card img{height:210px}.room-card .full{grid-column:auto}}
 @media(max-width:620px){.public-site .hero{padding:64px 20px}.public-site .hero h1{font-size:52px;letter-spacing:-3px}.public-site .hero-card{padding:26px}.room-features{display:none}}
 
+
+
+/* Public rules and contract */
+.rules-panel{display:grid;grid-template-columns:1.4fr .6fr;gap:28px;align-items:start;padding:30px;border:1px solid #32343a;border-radius:22px;background:#17181b}.rules-list{display:grid;gap:12px;margin:24px 0 0;padding:0;list-style:none}.rules-list li{display:flex;gap:10px;align-items:flex-start;color:#e5e6e8;line-height:1.5}.rules-list svg{flex:0 0 auto;margin-top:2px;color:#d68a9a}.contract-download{text-align:center}.contract-download>svg{color:#d68a9a;margin-bottom:12px}.contract-download .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:10px}@media(max-width:760px){.rules-panel{grid-template-columns:1fr;padding:22px}.contract-download{text-align:left}}
