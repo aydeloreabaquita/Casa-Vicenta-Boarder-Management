@@ -100,7 +100,7 @@ export default function App(){
       </button>
 
       <div className="top-actions">
-        <button className="text-btn" onClick={()=>navigate("home")}>Website</button>
+        {page!=="home"&&<button className="text-btn" onClick={()=>navigate("home")}>Website</button>}
         {user
           ?<>
             <button className="text-btn" onClick={goToProfile}>Profile</button>
@@ -112,13 +112,15 @@ export default function App(){
       </div>
     </header>
 
-    {page==="home"&&<PublicWebsite onNavigate={navigate} user={user} onProfile={goToProfile}/>} 
-    {page==="apply"&&<ApplicationForm onNavigate={navigate}/>} 
-    {page==="applicant-request"&&<ApplicantRequest onNavigate={navigate}/>} 
-    {page==="login"&&<LoginPage onNavigate={navigate} onAuthenticated={authenticated}/>} 
-    {page==="change-password"&&<ChangePasswordPage onChanged={passwordChanged}/>} 
-    {page==="boarder"&&user?.role==="boarder"&&<BoarderDashboard/>} 
-    {page==="admin"&&user?.role==="admin"&&<AdminDashboard/>} 
+    <main className="page-transition" key={page}>
+      {page==="home"&&<PublicWebsite onNavigate={navigate} user={user} onProfile={goToProfile}/>}
+      {page==="apply"&&<ApplicationForm onNavigate={navigate}/>}
+      {page==="applicant-request"&&<ApplicantRequest onNavigate={navigate}/>}
+      {page==="login"&&<LoginPage onNavigate={navigate} onAuthenticated={authenticated}/>}
+      {page==="change-password"&&<ChangePasswordPage onChanged={passwordChanged}/>}
+      {page==="boarder"&&user?.role==="boarder"&&<BoarderDashboard/>}
+      {page==="admin"&&user?.role==="admin"&&<AdminDashboard/>}
+    </main>
   </div>
 }
 

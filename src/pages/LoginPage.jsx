@@ -100,7 +100,7 @@ export default function LoginPage({ onNavigate, onAuthenticated }) {
         </button>
       </form>
 
-      <div className="actions" style={{justifyContent:"space-between", marginTop:"12px"}}>
+      <div className="actions" style={{justifyContent:"flex-start", marginTop:"12px"}}>
         <button
           type="button"
           className="text-btn"
@@ -111,14 +111,6 @@ export default function LoginPage({ onNavigate, onAuthenticated }) {
           }}
         >
           Forgot password?
-        </button>
-
-        <button
-          type="button"
-          className="text-btn"
-          onClick={() => onNavigate("home")}
-        >
-          Back to website
         </button>
       </div>
 

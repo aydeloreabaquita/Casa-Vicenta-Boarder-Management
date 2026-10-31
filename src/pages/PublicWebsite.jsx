@@ -11,11 +11,15 @@ export default function PublicWebsite({ onNavigate, user, onProfile }) {
     api("/api/public/contact").then(setContact).catch(() => {});
     api("/api/public/contract").then(d => setContract(d.contract || null)).catch(() => setContract(null));
   }, []);
-  const ruleSummary = String(contract?.content || "")
+  const contractRules = String(contract?.content || "")
     .split(/\r?\n/)
     .map(line => line.replace(/^[-•*\d.)\s]+/, "").trim())
-    .filter(Boolean)
-    .slice(0, 5);
+    .filter(Boolean);
+  const requiredRules = [
+    "No pets are allowed.",
+    "Visitors staying at Casa Vicenta are subject to additional charges."
+  ];
+  const ruleSummary = [...contractRules.filter(rule => !requiredRules.includes(rule)).slice(0, 3), ...requiredRules];
 
   function downloadContract() {
     if (!contract?.content) return;

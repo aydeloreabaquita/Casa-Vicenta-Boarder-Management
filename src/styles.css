@@ -66,3 +66,15 @@
 .hero-card{background:linear-gradient(145deg,#e8bd51,#a9750d);color:#17120a}.public-site .pill{background:rgba(214,166,43,.18);color:#f4cf70;border-color:rgba(244,207,112,.38)}
 .sidebar{background:linear-gradient(180deg,#d6a62b,#a9750d);color:#17120a}.sidebar button{color:#17120a}.sidebar button.active,.sidebar button:hover{background:rgba(255,255,255,.28)}
 .brand .logo{box-shadow:0 5px 18px rgba(214,166,43,.24)}
+
+/* Motion and refreshed public hero */
+.public-site .hero:before{background-image:url("/casa-vicenta-building.jpg");background-position:center 52%}
+.public-site .hero-card h3,.public-site .hero-card .big-number{color:#f0c75e;text-shadow:0 2px 16px rgba(214,166,43,.18)}
+.rules-list svg{color:#d6a62b}
+.btn,.text-btn,.icon-btn,.brand{transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease,border-color .2s ease,color .2s ease}
+.btn:hover,.icon-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(214,166,43,.2)}
+.text-btn:hover,.brand:hover{color:#f0c75e;transform:translateY(-1px)}
+.btn:active,.text-btn:active,.icon-btn:active,.brand:active{transform:translateY(0) scale(.98)}
+.page-transition{animation:page-enter .38s cubic-bezier(.22,1,.36,1)}
+@keyframes page-enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.page-transition{animation:none}.btn,.text-btn,.icon-btn,.brand{transition:none}}
