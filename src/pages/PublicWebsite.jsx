@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CalendarDays, CheckCircle2, Download, FileText, Mail, Phone, ShieldCheck, Snowflake, Wifi } from "lucide-react";
+import { CalendarDays, CheckCircle2, Download, ExternalLink, FileText, Mail, MessageCircle, ShieldCheck, Snowflake, Wifi } from "lucide-react";
 import { api, peso } from "../lib/api";
 
 export default function PublicWebsite({ onNavigate, user, onProfile }) {
@@ -60,7 +60,7 @@ export default function PublicWebsite({ onNavigate, user, onProfile }) {
       </div>
     </section>
     <section className="section soft"><div className="grid cards-3"><div className="mini-feature"><CheckCircle2/><div><strong>Simple application</strong><p>Submit details online.</p></div></div><div className="mini-feature"><CalendarDays/><div><strong>Scheduled viewing</strong><p>Admin confirms your visit.</p></div></div><div className="mini-feature"><Mail/><div><strong>Viewing updates</strong><p>Applicants can use the website to contact Casa Vicenta or request a new viewing schedule.</p></div></div></div></section>
-    <section className="section contact-strip"><div><Phone size={18}/> {contact.landladyName || "Casa Vicenta"} {contact.landladyPhone ? `• ${contact.landladyPhone}` : ""} {contact.landladyEmail ? `• ${contact.landladyEmail}` : ""}</div></section>
+    <section className="section contact-strip"><div className="contact-details"><strong>{contact.landladyName || "Casa Vicenta"}</strong><span>Questions about rooms or applications?</span></div><div className="contact-actions">{contact.landladyPhone&&<a className="btn secondary" href={`https://wa.me/${contact.landladyPhone.replace(/\D/g, "")}`} target="_blank" rel="noreferrer"><MessageCircle size={18}/> WhatsApp {contact.landladyPhone}</a>}{contact.landladyFacebook&&<a className="btn secondary" href={contact.landladyFacebook} target="_blank" rel="noreferrer"><ExternalLink size={18}/> Chat on Facebook</a>}</div></section>
   </div>;
 }
 

@@ -86,7 +86,8 @@ const settings = {
   bank_account_number: "DEMO-4821",
   landlady_name: "Property Manager",
   landlady_email: "hello@example.test",
-  landlady_phone: "+63 917 000 0000"
+  landlady_phone: "+639674330745",
+  landlady_facebook: "https://www.facebook.com/profile.php?id=61595747145155"
 };
 
 function adminResponse(path) {
@@ -163,7 +164,7 @@ export async function demoApi(path, options = {}) {
   if (path === "/api/auth/change-password") return { user: demoUsers.boarder };
 
   if (path === "/api/public/rooms") return { rooms: rooms.filter(r => r.status === "vacant").map(r => ({ id: r.id, roomNumber: r.roomNumber, floor: r.floor, monthlyRate: r.monthlyRate })) };
-  if (path === "/api/public/contact") return { landladyName: "Property Manager", landladyEmail: "hello@example.test", landladyPhone: "+63 917 000 0000" };
+  if (path === "/api/public/contact") return { landladyName: "Casa Vicenta", landladyEmail: "", landladyPhone: "+639674330745", landladyFacebook: "https://www.facebook.com/profile.php?id=61595747145155" };
   if (path === "/api/public/contract") return { contract: { title: "Casa Vicenta House Rules", version: "demo-1.0", content: "Keep common areas clean.\nRespect quiet hours.\nReport maintenance concerns through the portal.\nPay rent and utilities by their stated due dates.\nVisitors must follow Casa Vicenta security and house policies." } };
   if (path === "/api/applications" && method === "POST") return { ok: true, message: "Demo mode: application submitted successfully." };
   if (path === "/api/public/applicant-requests" && method === "POST") return { ok: true, message: "Demo mode: request sent successfully." };

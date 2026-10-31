@@ -49,7 +49,8 @@ export default {
         return json({
           landladyName: settings.landlady_name || "",
           landladyEmail: settings.landlady_email || "",
-          landladyPhone: settings.landlady_phone || ""
+          landladyPhone: settings.landlady_phone || "",
+          landladyFacebook: settings.landlady_facebook || ""
         });
       }
       if (url.pathname === "/api/public/contract" && request.method === "GET") {
@@ -2305,7 +2306,7 @@ async function getSettings(db) {
 
 async function updateSettings(request, env, admin) {
   const body = await readJson(request);
-  const allowed = ["electricity_rate","electricity_due_day","water_due_day","water_monthly_amount","bank_name","bank_account_name","bank_account_number","landlady_name","landlady_email","landlady_phone"];
+  const allowed = ["electricity_rate","electricity_due_day","water_due_day","water_monthly_amount","bank_name","bank_account_name","bank_account_number","landlady_name","landlady_email","landlady_phone","landlady_facebook"];
   const statements = [];
   const changed = {};
   for (const key of allowed) {
