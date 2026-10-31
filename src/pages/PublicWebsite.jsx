@@ -41,7 +41,7 @@ export default function PublicWebsite({ onNavigate, user, onProfile }) {
   ];
   return <div className="public-site">
     <section className="hero"><div className="hero-content"><div className="pill">Comfortable • Secure • Convenient</div><h1>Welcome to Casa<br/>Vicenta.</h1><p>See available rooms, submit your application, and receive your viewing schedule after admin confirmation.</p><div className="actions"><button className="btn primary" onClick={() => onNavigate("apply")}>Apply Now</button><button className="btn secondary" onClick={() => onNavigate("applicant-request")}>Applicant Contact / Reschedule</button>{user?<button className="btn secondary" onClick={onProfile}>Profile</button>:<button className="btn secondary" onClick={() => onNavigate("login")}>Boarder / Admin Login</button>}</div></div>
-      <div className="hero-card"><h3>Casa Vicenta Availability</h3><div className="big-number">{rooms.length}</div><p>rooms currently available</p></div>
+      <div className="hero-card"><h3>Casa Vicenta Availability</h3><div className="floor-availability"><div><span>1FL</span><strong>12</strong><small>rooms available</small></div><div><span>2FL</span><strong>18</strong><small>rooms available</small></div></div><p className="room-number-list">Rooms 101, 102, 103 • 201, 202, 203</p></div>
     </section>
     <section className="section"><div className="section-head"><div><div className="eyebrow">Vacant Rooms</div><h2>Available now</h2></div></div><div className="grid cards-3">
       {rooms.length === 0 && <div className="card"><h3>No rooms listed right now</h3><p className="muted">Please check again or contact Casa Vicenta.</p></div>}
