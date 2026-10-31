@@ -10,7 +10,11 @@ import AdminDashboard from "./pages/AdminDashboard";
 import { api, isDemoMode } from "./lib/api";
 
 function publicPageFromPath() {
-  if (isDemoMode) return window.location.hash === "#applicant-request" ? "applicant-request" : "home";
+  if (isDemoMode) {
+    if (window.location.hash === "#applicant-request") return "applicant-request";
+    if (window.location.hash === "#apply") return "apply";
+    return "home";
+  }
   return window.location.pathname === "/applicant-request" ? "applicant-request" : "home";
 }
 
