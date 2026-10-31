@@ -18,11 +18,6 @@ function publicPageFromPath() {
   return window.location.pathname === "/applicant-request" ? "applicant-request" : "home";
 }
 
-const demoUsers = {
-  admin: { id: 1, fullName: "Aydelore Abaquita", email: "aabaquita22@gmail.com", phone: null, role: "admin", mustChangePassword: false, status: "active" },
-  boarder: { id: 11, fullName: "Jamie Santos", email: "boarder@demo.local", phone: "09170000011", role: "boarder", mustChangePassword: false, status: "active" }
-};
-
 export default function App(){
   const [page,setPage]=useState(publicPageFromPath);
   const [user,setUser]=useState(null);
@@ -55,19 +50,14 @@ export default function App(){
   function navigate(next){
     if(isDemoMode){
       if(next==="applicant-request") window.location.hash="applicant-request";
-      else if(["home","apply","login"].includes(next) && window.location.hash) window.history.replaceState({},"",window.location.pathname+window.location.search);
+      else if(next==="apply") window.location.hash="apply";
+      else if(["home","login"].includes(next) && window.location.hash) window.history.replaceState({},"",window.location.pathname+window.location.search);
     } else if(next==="applicant-request"){
       if(window.location.pathname!=="/applicant-request") window.history.pushState({},"","/applicant-request");
     } else if(["home","apply","login"].includes(next)){
       if(window.location.pathname!=="/") window.history.pushState({},"","/");
     }
     setPage(next);
-  }
-
-  function enterDemo(role){
-    const demoUser=demoUsers[role];
-    setUser(demoUser);
-    setPage(role);
   }
 
   function authenticated(nextUser){
@@ -102,7 +92,7 @@ export default function App(){
   return <div className="app">
     <header className="topbar">
       <button className="brand" onClick={()=>navigate("home")}>
-        <span className="logo">CV</span>
+        <img className="logo" src={`${import.meta.env.BASE_URL}casa-vicenta-logo.png`} alt="Casa Vicenta logo"/>
         <span>
           <strong>Casa Vicenta</strong>
           <small>Boarder Management System</small>
@@ -111,26 +101,16 @@ export default function App(){
 
       <div className="top-actions">
         <button className="text-btn" onClick={()=>navigate("home")}>Website</button>
-        {isDemoMode&&<>
-          <span className="demo-badge">Portfolio Demo</span>
-          <button className="text-btn demo-role" onClick={()=>navigate("login")}>Admin Demo</button>
-          <button className="text-btn demo-role" onClick={()=>enterDemo("boarder")}>Boarder Demo</button>
-        </>}
         {user
           ?<>
             <button className="text-btn" onClick={goToProfile}>Profile</button>
             <button className="text-btn" onClick={logout}>Logout</button>
           </>
-          :!isDemoMode&&<button className="text-btn" onClick={()=>navigate("login")}>Login</button>
+          :<button className="text-btn" onClick={()=>navigate("login")}>Login</button>
         }
         <ThemeToggle theme={theme} onToggle={()=>setTheme(theme==="light"?"dark":"light")}/>
       </div>
     </header>
-
-    {isDemoMode&&<div className="demo-switcher">
-      <div><strong>Portfolio demo</strong><span>Sample data only. Actions are simulated.</span></div>
-      <div className="actions"><button className="btn secondary small" onClick={()=>navigate("home")}>Public Site</button><button className="btn secondary small" onClick={()=>enterDemo("boarder")}>Boarder Demo</button><button className="btn primary small" onClick={()=>navigate("login")}>Admin Demo</button></div>
-    </div>}
 
     {page==="home"&&<PublicWebsite onNavigate={navigate} user={user} onProfile={goToProfile}/>} 
     {page==="apply"&&<ApplicationForm onNavigate={navigate}/>} 
