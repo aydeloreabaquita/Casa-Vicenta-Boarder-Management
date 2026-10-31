@@ -163,7 +163,7 @@ export async function demoApi(path, options = {}) {
   if (path === "/api/auth/forgot-password") return { message: "Demo mode: password reset request simulated." };
   if (path === "/api/auth/change-password") return { user: demoUsers.boarder };
 
-  if (path === "/api/public/rooms") return { rooms: rooms.filter(r => r.status === "vacant").map(r => ({ id: r.id, roomNumber: r.roomNumber, floor: r.floor, monthlyRate: r.monthlyRate })) };
+  if (path === "/api/public/rooms") return { rooms: rooms.map(r => ({ id: r.id, roomNumber: r.roomNumber, floor: r.floor, monthlyRate: r.monthlyRate })) };
   if (path === "/api/public/contact") return { landladyName: "Casa Vicenta", landladyEmail: "", landladyPhone: "+639674330745", landladyFacebook: "https://www.facebook.com/profile.php?id=61595747145155" };
   if (path === "/api/public/contract") return { contract: { title: "Casa Vicenta House Rules", version: "demo-1.0", content: "Keep common areas clean.\nRespect quiet hours.\nReport maintenance concerns through the portal.\nNo pets are allowed.\nVisitors staying at Casa Vicenta are subject to additional charges." } };
   if (path === "/api/applications" && method === "POST") return { ok: true, message: "Demo mode: application submitted successfully." };
